@@ -54,6 +54,10 @@ set(BOX2D_SOURCE_FILES
 	dynamics/b2_world_callbacks.cpp
 	rope/b2_rope.cpp)
 
+if (DEFINED PSP_LIBRARIES)
+	set(BOX2D_SOURCE_FILES ${BOX2D_SOURCE_FILES} PspMath.cpp)
+endif()
+
 set(BOX2D_HEADER_FILES
 	../include/box2d/b2_api.h
 	../include/box2d/b2_block_allocator.h
@@ -95,6 +99,10 @@ set(BOX2D_HEADER_FILES
 	../include/box2d/b2_world.h
 	../include/box2d/b2_world_callbacks.h
 	../include/box2d/box2d.h)
+
+if (DEFINED PSP_LIBRARIES)
+	set(BOX2D_SOURCE_FILES ${BOX2D_SOURCE_FILES} ../include/PspMath.h)
+endif()
 
 add_library(box2d ${BOX2D_SOURCE_FILES} ${BOX2D_HEADER_FILES})
 target_include_directories(box2d

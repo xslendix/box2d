@@ -481,14 +481,14 @@ void b2RevoluteJoint::Draw(b2Draw* draw) const
 
 	const float L = 0.5f;
 
-	b2Vec2 r = L * b2Vec2(cosf(angle), sinf(angle));
+	b2Vec2 r = L * b2Vec2(b2Cos(angle), b2Sin(angle));
 	draw->DrawSegment(pB, pB + r, c1);
 	draw->DrawCircle(pB, L, c1);
 
 	if (m_enableLimit)
 	{
-		b2Vec2 rlo = L * b2Vec2(cosf(m_lowerAngle), sinf(m_lowerAngle));
-		b2Vec2 rhi = L * b2Vec2(cosf(m_upperAngle), sinf(m_upperAngle));
+		b2Vec2 rlo = L * b2Vec2(b2Cos(m_lowerAngle), b2Sin(m_lowerAngle));
+		b2Vec2 rhi = L * b2Vec2(b2Cos(m_upperAngle), b2Sin(m_upperAngle));
 
 		draw->DrawSegment(pB, pB + rlo, c2);
 		draw->DrawSegment(pB, pB + rhi, c3);

@@ -34,8 +34,19 @@ inline bool b2IsValid(float x)
 	return isfinite(x);
 }
 
-#define	b2Sqrt(x)	sqrtf(x)
-#define	b2Atan2(y, x)	atan2f(y, x)
+#ifdef PSP
+	#include "PspMath.h"
+
+	#define	b2Sqrt(x)     vfpu_sqrtf(x)
+	#define	b2Atan2(y, x) vfpu_atan2f(y, x)
+	#define	b2Sin(x)      vfpu_sinf(x)
+	#define	b2Cos(x)      vfpu_cosf(x)
+#else
+	#define	b2Sqrt(x)     sqrtf(x)
+	#define	b2Atan2(y, x) atan2f(y, x)	
+	#define	b2Sin(x)      sinf(x)
+	#define	b2Cos(x)      cosf(x)
+#endif
 
 /// A 2D column vector.
 struct B2_API b2Vec2
@@ -292,16 +303,16 @@ struct B2_API b2Rot
 	explicit b2Rot(float angle)
 	{
 		/// TODO_ERIN optimize
-		s = sinf(angle);
-		c = cosf(angle);
+		s = b2Sin(angle);
+		c = b2Cos(angle);
 	}
 
 	/// Set using an angle in radians.
 	void Set(float angle)
 	{
 		/// TODO_ERIN optimize
-		s = sinf(angle);
-		c = cosf(angle);
+		s = b2Sin(angle);
+		c = b2Cos(angle);
 	}
 
 	/// Set to the identity rotation
